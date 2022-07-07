@@ -27,11 +27,34 @@ var svg = d3.select("#my_dataviz")
   .attr("transform",
         "translate(" + margin.left + "," + margin.top + ")");
     var nodecolor = d3.scaleOrdinal(["#A0E7FA","#FAA0F7"]);
-    svg
-    .append("circle").attr("cx",500).attr("cy",130).attr("r", 6).style("fill", "#A0E7FA")
-    .append("circle").attr("cx",500).attr("cy",160).attr("r", 6).style("fill", "#FAA0F7")
-    .append("text").attr("x", 520).attr("y", 130).text("Male").style("font-size", "15px").attr("alignment-baseline","middle")
-    .append("text").attr("x", 520).attr("y", 160).text("Female").style("font-size", "15px").attr("alignment-baseline","middle")
+
+    //labels
+    svg.append("text")
+      .attr("transform", "translate(50,10)")
+      .text("Covid-19 Clusters")
+      .attr("font-size","20px")
+    svg.append("circle")
+      .attr("cx",0)
+      .attr("cy",50)
+      .attr("r", 6)
+      .style("fill", "#A0E7FA")
+    svg.append("circle")
+      .attr("cx",0)
+      .attr("cy",80)
+      .attr("r", 6)
+      .style("fill", "#FAA0F7")
+    svg.append("text")
+      .attr("x", 20)
+      .attr("y", 50)
+      .text("Male")
+      .style("font-size", "15px")
+      .attr("alignment-baseline","middle")
+    svg.append("text")
+      .attr("x", 20)
+      .attr("y", 80)
+      .text("Female")
+      .style("font-size", "15px")
+      .attr("alignment-baseline","middle")
   
 // Load external data
 Promise.all([
@@ -62,7 +85,7 @@ var nodes = []
         console.log(dataset)
 
     // Initialize the links
-    var link = svg
+    var link = svg.append("g")
       .selectAll("line")
       .data(dataset.links)
       .enter()
@@ -70,7 +93,7 @@ var nodes = []
         .style("stroke", "#aaa")
   
     // Initialize the nodes
-    var node = svg
+    var node = svg.append("g")
       .selectAll("circle")
       .data(dataset.nodes)
       .enter()
