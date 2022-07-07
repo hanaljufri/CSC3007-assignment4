@@ -26,6 +26,7 @@ var svg = d3.select("#my_dataviz")
 .append("g")
   .attr("transform",
         "translate(" + margin.left + "," + margin.top + ")");
+    var nodecolor = d3.scaleOrdinal(["#A0E7FA","#FAA0F7"]);
   
 // Load external data
 Promise.all([
@@ -71,7 +72,7 @@ var nodes = []
       .enter()
       .append("circle")
         .attr("r", 20)
-        .style("fill", "#69b3a2")
+        .attr("fill", function(d) { return nodecolor(d.gender); })
   
     // Let's list the force we wanna apply on the network
     var simulation = d3.forceSimulation(dataset.nodes)                 // Force algorithm is applied to data.nodes
