@@ -102,13 +102,13 @@ var nodes = []
         .attr("fill", function(d) { return nodecolor(d.gender); })
   
     // Let's list the force we wanna apply on the network
-    var simulation = d3.forceSimulation(dataset.nodes)                 // Force algorithm is applied to data.nodes
-        .force("link", d3.forceLink()                               // This force provides links between nodes
-              .id(function(d) { return d.id; })                     // This provide  the id of a node
-              .links(dataset.links)                                    // and this the list of links
+    var simulation = d3.forceSimulation(dataset.nodes) 
+        .force("link", d3.forceLink()                              
+              .id(function(d) { return d.id; })                    
+              .links(dataset.links)                                    
         )
         .force("charge", d3.forceManyBody().strength(-40))  
-        .force("center", d3.forceCenter(width / 2, height / 2))       // This adds repulsion between nodes. Play with the -400 for the repulsion strength
+        .force("center", d3.forceCenter(width / 2, height / 2))      
         .on("end", ticked)
         .force('collision', d3.forceCollide().radius(function(d) {
                   return d.radius}))
